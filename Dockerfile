@@ -61,17 +61,34 @@ RUN apt update && apt upgrade -y && \
     libopus-dev \
     && rm -rf /var/lib/apt/lists /var/cache/apt/archives /tmp
 
-# Pypi package Repo upgrade
-RUN pip3 install --upgrade pip setuptools
+RUN curl https://cli-assets.heroku.com/install.sh
+
+RUN python3 -m ensurepip \
+    && pip3 install --upgrade pip setuptools \
+    && rm -r /usr/lib/python*/ensurepip && \
+    if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && \
+    if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi && \
+    rm -r /root/.cache
 
 
-# Copy Python Requirements to /root/nana
-RUN git clone https://github.com/sandy1709/catuserbot.git /root/cat
-WORKDIR /root/cat
 
 
+#
+# Clone repo and prepare working directory
+#
+
+RUN git clone https://github.com/sandy1709/catuserbot.git /root/userbot
+RUN mkdir /root/userbot/.bin
+WORKDIR /root/userbot/
+ENV PATH="/root/userbot/.bin:$PATH"
+WORKDIR /root/userbot/
+#
+# Copies session and config (if it exists)
+#
+COPY ./sample_config.env ./userbot.session* ./config.env* /root/userbot/
+
+#
 # Install requirements
-RUN sudo pip3 install -U -r requirements.txt
-
-# Starting Worker
-CMD ["python3","-m","nana"]
+#
+RUN pip3 install -r requirements.txt
+CMD ["python3","-m","userbot"]
