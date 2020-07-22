@@ -16,8 +16,8 @@ USER_BOT_WARN_ZERO = "`You were spamming my peru master's inbox, henceforth your
 USER_BOT_NO_WARN = ("[──▄█▀█▄─────────██ \n▄████████▄───▄▀█▄▄▄▄ \n██▀▼▼▼▼▼─▄▀──█▄▄ \n█████▄▲▲▲─▄▄▄▀───▀▄ \n██████▀▀▀▀─▀────────▀▀](tg://user?id=1035034432)\n\n"
                     "`Hello, this is cat Security Service.You have found your way here to my master,`"
                     f"{DEFAULTUSER}'s` inbox.\n\n"
-                    "Leave your name,reason and 10k$ and hopefully you'll get a reply within 2 light years.`\n\n"
-                    "** Send** `/start` ** so that we can decide why you're here.**")
+                    "'.`\n\n"
+                    "I am the protector of Devik, my boss is currently offline. Wait for them to come online and do not spam here.* Send** `/start` ** so that we can decide why you're here.**")
 
 
 if Var.PRIVATE_GROUP_ID is not None:
